@@ -42,7 +42,6 @@ class CandleStickChartWithForceIndexIndicator extends Component {
 
   render() {
     const { type, data: initialData, width, ratio } = this.props
-    console.log('initialData', initialData)
 
     const fi = forceIndex()
       .merge((d, c) => { d.fi = c })
@@ -68,6 +67,8 @@ class CandleStickChartWithForceIndexIndicator extends Component {
     const end = xAccessor(data[Math.max(0, data.length - 150)])
     const xExtents = [start, end]
 
+    console.log('xScale', xScale())
+
     return (
       <ChartCanvas
         height={550}
@@ -81,6 +82,7 @@ class CandleStickChartWithForceIndexIndicator extends Component {
         xAccessor={xAccessor}
         displayXAccessor={displayXAccessor}
         xExtents={xExtents}
+        zoomEvent={true}
       >
         <Chart
           id={1}

@@ -11,7 +11,7 @@ function parseData(parse) {
     d.volume = +d.volume
 
     return d
-  };
+  }
 }
 
 const parseDate = timeParse("%Y-%m-%d")
