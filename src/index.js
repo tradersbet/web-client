@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom';
 import Chart from './chart/'
 import { getData } from './utils'
+import App from './modules/app'
 
 class ChartComponent extends Component {
   state = {}
@@ -45,6 +47,9 @@ class ChartComponent extends Component {
 }
 
 render(
-  <ChartComponent />,
-  document.getElementById('root')
+  (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  ), document.getElementById('root')
 )
