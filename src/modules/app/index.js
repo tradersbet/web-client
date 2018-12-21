@@ -35,26 +35,23 @@ import NavItemLink from './NavItemLink';
 import Inbox from './Inbox';
 import Starred from './Starred';
 import SendMail from './SendMail';
-// import Drafts from './Drafts';
-
-const TO_PREFIX = '/discover-more/routing-examples/drawers';
 
 const navItems = [{
   label: 'Inbox',
-  to: TO_PREFIX,
+  to: '/',
   exact: true,
   icon: 'inbox',
 }, {
-  label: 'Starred',
-  to: `${TO_PREFIX}/starred`,
+  label: 'Starred1',
+  to: '/starred',
   icon: 'star',
 }, {
   label: 'Send mail',
-  to: `${TO_PREFIX}/send-mail`,
+  to: '/send-mail',
   icon: 'send',
 }, {
   label: 'Drafts',
-  to: `${TO_PREFIX}/drafts`,
+  to: '/drafts',
   icon: 'drafts',
 }];
 
@@ -87,7 +84,7 @@ class RoutingExample extends PureComponent {
 
     return (
       <div>
-        <Toolbar colored fixed title="Routing Example" nav={<Button icon onClick={this.showDrawer}>menu</Button>} />
+        <Toolbar colored fixed title='tradersBet' nav={<Button icon onClick={this.showDrawer}>menu</Button>} />
         <CSSTransitionGroup
           component="div"
           transitionName="md-cross-fade"
