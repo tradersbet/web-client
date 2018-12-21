@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { SignIn } from '../auth'
 import Home from '../home'
+import 'react-md/src/scss/_react-md.scss'
 
 class App extends Component {
   render() {

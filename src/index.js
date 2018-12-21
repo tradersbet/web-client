@@ -4,6 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import Chart from './chart/'
 import { getData } from './utils'
 import App from './modules/app'
+import WebFontLoader from 'webfontloader'
+import './index.css'
+
+WebFontLoader.load({
+  google: {
+    families: ['Roboto:300,400,500,700', 'Material Icons'],
+  },
+});
 
 class ChartComponent extends Component {
   state = {}
