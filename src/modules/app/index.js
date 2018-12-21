@@ -1,29 +1,3 @@
-// import React, { Component } from 'react'
-// import { Switch, Route } from 'react-router-dom'
-// import { SignIn } from '../auth'
-// import Home from '../home'
-// import 'react-md/src/scss/_react-md.scss'
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <div>
-//         App
-//         <Switch>
-//           <Route exact path='/' component={Home}/>
-//           <Route path='/sign-in' component={SignIn}/>
-//         </Switch>
-//       </div>
-//     )
-//   }
-// }
-//
-// export default App
-
-
-
-
-/* RoutingExample.jsx */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
@@ -31,45 +5,60 @@ import { withRouter } from 'react-router';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Button, Drawer, Toolbar } from 'react-md';
 
-import NavItemLink from './NavItemLink';
+import { SignIn } from '../auth'
+import Home from '../home'
+
+import NavItemLink from './NavItemLink'
 import Inbox from './Inbox';
 import Starred from './Starred';
-import SendMail from './SendMail';
+import SendMail from './SendMail'
 
 import config from '../../config'
+const { routes, navItems } = config
 
-const { navItems } = config
-
-class RoutingExample extends PureComponent {
+class App extends PureComponent {
   static propTypes = {
     location: PropTypes.object.isRequired,
-  };
-  state = { visible: false };
+  }
+
+  state = { visible: false }
 
   componentDidMount() {
     // Need to set the renderNode since the drawer uses an overlay
-    this.dialog = document.getElementById('drawer-routing-example-dialog');
+    this.dialog = document.getElementById('drawer-routing-example-dialog')
   }
 
   showDrawer = () => {
-    this.setState({ visible: true });
-  };
+    this.setState({ visible: true })
+  }
 
   hideDrawer = () => {
-    this.setState({ visible: false });
-  };
+    this.setState({ visible: false })
+  }
 
   handleVisibility = (visible) => {
-    this.setState({ visible });
-  };
+    this.setState({ visible })
+  }
 
   render() {
-    const { location } = this.props;
-    const { visible } = this.state;
+    const { location } = this.props
+    const { visible } = this.state
 
     return (
       <div>
-        <Toolbar colored fixed title='tradersBet' nav={<Button icon onClick={this.showDrawer}>menu</Button>} />
+        <Toolbar
+          colored
+          fixed
+          title="tradersBet"
+          nav={
+            <Button
+              icon
+              onClick={this.showDrawer}
+            >
+              menu
+            </Button>
+          }
+        />
         <CSSTransitionGroup
           component="div"
           transitionName="md-cross-fade"
@@ -78,7 +67,7 @@ class RoutingExample extends PureComponent {
           className="md-toolbar-relative md-grid"
         >
           <Switch key={location.pathname}>
-            <Route path={navItems[0].to} exact component={Inbox} />
+            <Route path={routes.home} exact component={Home} />
             <Route path={navItems[1].to} component={Starred} />
             <Route path={navItems[2].to} component={SendMail} />
           </Switch>
@@ -87,12 +76,13 @@ class RoutingExample extends PureComponent {
           type={Drawer.DrawerTypes.TEMPORARY}
           visible={visible}
           onVisibilityChange={this.handleVisibility}
-          header={<Toolbar title={<Link to="/components/drawers#react-router-example">Drawer examples</Link>} />}
+          header={<Toolbar title={<Link to="/components/drawers#react-router-example">Menu</Link>} />}
           renderNode={this.dialog}
           navItems={navItems.map(props => <NavItemLink {...props} key={props.to} />)}
         />
       </div>
-    );
+    )
   }
 }
-export default withRouter(RoutingExample);
+
+export default withRouter(App)
