@@ -36,24 +36,9 @@ import Inbox from './Inbox';
 import Starred from './Starred';
 import SendMail from './SendMail';
 
-const navItems = [{
-  label: 'Inbox',
-  to: '/',
-  exact: true,
-  icon: 'inbox',
-}, {
-  label: 'Starred1',
-  to: '/starred',
-  icon: 'star',
-}, {
-  label: 'Send mail',
-  to: '/send-mail',
-  icon: 'send',
-}, {
-  label: 'Drafts',
-  to: '/drafts',
-  icon: 'drafts',
-}];
+import config from '../../config'
+
+const { navItems } = config
 
 class RoutingExample extends PureComponent {
   static propTypes = {
