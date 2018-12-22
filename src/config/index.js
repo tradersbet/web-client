@@ -3,6 +3,8 @@ const routes = {
   game: '/game',
   history: '/history',
   news: '/news',
+  signIn: '/sign-in',
+  signUp: '/sign-up',
 }
 
 const navItems = [
@@ -29,7 +31,18 @@ const navItems = [
   }
 ]
 
+const ip = 'http://10.25.128.242:8000'
+const api = {
+  register: `${ip}/api/register`,
+  login: `${ip}/api/login`,
+  dashboard: `${ip}/api/dashboard`,
+  joinGame: `${ip}/api/joingame`,
+  ws: 'ws://10.25.128.242:8080',
+  buy: `${ip}/api/transaction`,
+}
+
 const config = {
+  api,
   routes,
   navItems,
 }

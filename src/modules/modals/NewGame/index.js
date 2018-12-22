@@ -26,7 +26,6 @@ class NewGameModal extends PureComponent {
 
     return (
       <div>
-        <Button raised onClick={show}>Open the Dialog</Button>
         <DialogContainer
           id="simple-action-dialog"
           visible={visible}

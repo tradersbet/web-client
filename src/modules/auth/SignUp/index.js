@@ -7,7 +7,7 @@ import './index.css'
 
 const { api } = config
 
-class SignIn extends Component {
+class SignUp extends Component {
   state = {
     autohide: true,
     toasts: [],
@@ -34,22 +34,17 @@ class SignIn extends Component {
     this.setState({ toasts })
   }
 
-  login = () => {
+  register = () => {
     const { addToast } = this
     const { email, pass } = this.state
-    const { history } = this.props
-    console.log('props', this.props)
 
-    axios.post(api.login, {
+    axios.post(api.register, {
       email,
       password: pass,
     })
     .then(function (response) {
       console.log(response)
-      const { data } = response
-      const { token } = data && data.data
-      localStorage.setItem('token', token)
-      history.push('/')
+
     })
     .catch(function (error) {
       console.log(error)
@@ -59,9 +54,10 @@ class SignIn extends Component {
 
   render() {
     const { toasts, autohide } = this.state
+
     return (
       <div className="sign-up">
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
         <TextField
           id="floating-center-title"
           label="Email"
@@ -75,7 +71,7 @@ class SignIn extends Component {
           type="password"
           onChange={this.changePass}
         />
-        <Button flat primary swapTheming onClick={this.login}>Sign In</Button>
+        <Button flat primary swapTheming onClick={this.register}>Sign Up</Button>
         <Snackbar
           id="example-snackbar"
           toasts={toasts}
@@ -87,4 +83,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn
+export default SignUp

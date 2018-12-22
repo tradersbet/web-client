@@ -67,8 +67,6 @@ class CandleStickChartWithForceIndexIndicator extends Component {
     const end = xAccessor(data[Math.max(0, data.length - 150)])
     const xExtents = [start, end]
 
-    console.log('xScale', xScale())
-
     return (
       <ChartCanvas
         height={450}

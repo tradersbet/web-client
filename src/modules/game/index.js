@@ -1,43 +1,199 @@
 import React, { Component } from 'react'
 import { SelectField } from 'react-md'
+import axios from 'axios'
 import { getData } from '../../utils'
 import Chart from './Chart/'
 import OperationsTable from './OperationsTable'
 import ControlPanel from './ControlPanel'
+import Timer from './Timer'
+
+import config from '../../config'
 
 import './index.css'
 
+const { api } = config
+
 const COINS = ['BTC', 'ETH', 'LTC'];
 
+// const tableData = [
+//   {
+//     id: 0,
+//     type: 'buy',
+//     date: moment().startOf('hour').fromNow(),
+//     user: 'amadev',
+//     benefit: '23%',
+//   },
+//   {
+//     id: 1,
+//     type: 'buy',
+//     date: moment().endOf('day').fromNow(),
+//     user: 'amadev',
+//     benefit: '23%',
+//   },
+//   {
+//     id: 2,
+//     type: 'buy',
+//     date: moment().startOf('day').fromNow(),
+//     user: 'amadev',
+//     benefit: '23%',
+//   }
+// ]
+
+
+
 class Game extends Component {
-  state = {}
+  state = {
+    tableData: [],
+    profit: 0,
+    currentPrice: 0,
+    timeToEnd: 0,
+    balance: 50,
+  }
 
   componentDidMount() {
-    getData().then(data => {
-      this.setState({ data })
+    const token = localStorage.getItem('token')
+    const nameGame = localStorage.getItem('currentGame')
+    const that = this
+
+    axios.post(api.joinGame, {
+      token,
+      nameGame,
+    })
+    .then(function (response) {
+      console.log('joinGame', response)
+      const { gameUserId, timeLeft } = response.data
+      console.log('timeLeft', timeLeft)
+      localStorage.setItem('gameUserId', gameUserId)
+    })
+    .catch(function (error) {
+      console.log(error)
+      // addToast(error)
     })
 
-    this.interval = setInterval((that) => {
+    // getData().then(data => {
+    //   this.setState({ data })
+    // })
+
+    // this.interval = setInterval((that) => {
+    //   const obj = {
+    //     absoluteChange: undefined,
+    //     close: 25.710416,
+    //     date: new Date(),
+    //     dividend: "",
+    //     high: 25.835021381744056,
+    //     low: 25.411360259406774,
+    //     open: 25.436282332605284,
+    //     percentChange: undefined,
+    //     split: "",
+    //     volume: 38409100,
+    //   }
+    //
+    // }, 1000, this)
+
+    const socket = new WebSocket(api.ws)
+    socket.onmessage = event => {
+      const change = JSON.parse(event.data)
+      const { ETHBTC } = change
+      // console.log('BTCUSDT', BTCUSDT)
+      const { data = [] } = this.state
       const obj = {
-        absoluteChange: undefined,
-        close: 25.710416,
+        ...ETHBTC,
         date: new Date(),
-        dividend: "",
-        high: 25.835021381744056,
-        low: 25.411360259406774,
-        open: 25.436282332605284,
-        percentChange: undefined,
-        split: "",
-        volume: 38409100,
       }
-      const { data } = that.state
+
+      const currentPrice = obj.high
+
+      // const obj = {
+      //     absoluteChange: undefined,
+      //     close: 25.710416,
+      //     date: new Date(),
+      //     dividend: "",
+      //     high: 25.835021381744056,
+      //     low: 25.411360259406774,
+      //     open: 25.436282332605284,
+      //     percentChange: undefined,
+      //     split: "",
+      //     volume: 38409100,
+      //   }
+
       const newData = [...data, obj]
-      that.setState({ data: newData })
-    }, 1000, this)
+      this.setState({
+        data: newData,
+        currentPrice,
+      })
+    };
+  }
+
+  buy = (value) => {
+    const token = localStorage.getItem('token')
+    const nameGame = localStorage.getItem('currentGame')
+    const gameUserId = localStorage.getItem('gameUserId')
+    const numberOfdata = this.state.tableData.length
+    const that = this
+
+    axios.post(api.buy, {
+      token,
+      nameGame,
+      currency: 'ETHBTC',
+      quantity: +value,
+      sellBuy: 1,
+      gameUserId,
+    })
+    .then(function (response) {
+      console.log(response)
+      const { data = {}} = response
+      const { transaction, wallet } = data
+      console.log('transaction', transaction)
+
+      const obj = {
+        id: numberOfdata + 1,
+        type: 'buy',
+        date: new Date(),
+        user: 'amadev',
+        amount: transaction.quantity,
+        currencyPrice: transaction.currencyPrice,
+        balance: wallet[0].quantity,
+      }
+
+      // console.log('transaction', transaction)
+      that.updateTableDate(obj)
+    })
+    .catch(function (error) {
+      console.log(error)
+      // addToast(error)
+    })
+
+    console.log('buy', value)
+  }
+
+  updateTableDate = (transaction) => {
+    this.setState((state) => {
+      const { tableData = [], currentPrice } = state
+      const { currencyPrice, balance } = transaction
+      const newProfit = Number(((currentPrice / currencyPrice) - 1) * 100).toFixed(2)
+      const newTableData = [...tableData, transaction]
+      return {
+        tableData: newTableData,
+        profit: newProfit,
+        balance,
+      }
+    })
   }
 
   render() {
-    const { data } = this.state
+    const nameGame = localStorage.getItem('currentGame')
+
+    // console.log('state', this.state)
+    // console.log('props', this.props)
+    // console.log('nameGame', nameGame)
+
+    const {
+      data,
+      tableData,
+      profit,
+      timeToEnd,
+      balance,
+    } = this.state
     // console.log('data', data)
 
     let chartWidth = 0
@@ -66,6 +222,7 @@ class Game extends Component {
           defaultValue={COINS[0]}
           simplifiedMenu={simplifiedMenu}
         />
+        <Timer timeToEnd={timeToEnd} />
         <div className="game-wrapper">
           <div
             className="chart-wrapper"
@@ -74,10 +231,16 @@ class Game extends Component {
             {chart}
           </div>
           <div className="coin-controll-wrapper">
-            <OperationsTable />
+            <OperationsTable
+              tableData={tableData}
+            />
           </div>
         </div>
-        <ControlPanel />
+        <ControlPanel
+          profit={profit}
+          balance={balance}
+          buy={this.buy}
+        />
       </div>
     )
   }

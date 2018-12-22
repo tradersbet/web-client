@@ -8,8 +8,7 @@ import { Button, Drawer, Toolbar } from 'react-md';
 
 import Header from './Header'
 
-import { SignIn } from '../auth'
-
+import { SignIn, SignUp } from '../auth'
 import Dashboard from '../dashboard'
 import History from '../history'
 import News from '../news'
@@ -17,11 +16,11 @@ import Game from '../game'
 
 import NavItemLink from './NavItemLink'
 import Inbox from './Inbox';
-import Starred from './Starred';
+import Starred from './Starred'
 import SendMail from './SendMail'
 
 import config from '../../config'
-const { routes, navItems } = config
+const { api, routes, navItems } = config
 
 class App extends PureComponent {
   static propTypes = {
@@ -64,13 +63,12 @@ class App extends PureComponent {
           className="md-toolbar-relative md-grid"
         >
           <Switch key={location.pathname}>
+            <Route path={routes.signIn} exact component={SignIn} />
+            <Route path={routes.signUp} exact component={SignUp} />
             <Route path={routes.dashboard} exact component={Dashboard} />
             <Route path={routes.game} exact component={Game} />
             <Route path={routes.news} exact component={News} />
             <Route path={routes.history} exact component={History} />
-
-            <Route path={navItems[1].to} component={Starred} />
-            <Route path={navItems[2].to} component={SendMail} />
           </Switch>
         </CSSTransitionGroup>
         <Drawer
