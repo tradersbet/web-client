@@ -5,6 +5,9 @@ import { withRouter } from 'react-router';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Button, Drawer, Toolbar } from 'react-md';
 
+
+import Header from './Header'
+
 import { SignIn } from '../auth'
 
 import Dashboard from '../dashboard'
@@ -50,18 +53,8 @@ class App extends PureComponent {
 
     return (
       <div>
-        <Toolbar
-          colored
-          fixed
-          title="tradersBet"
-          nav={
-            <Button
-              icon
-              onClick={this.showDrawer}
-            >
-              menu
-            </Button>
-          }
+        <Header
+          showDrawer={this.showDrawer}
         />
         <CSSTransitionGroup
           component="div"
