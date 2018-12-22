@@ -1,5 +1,8 @@
 const routes = {
   home: '/',
+  game: '/game',
+  history: '/history',
+  news: '/news',
 }
 
 const navItems = [

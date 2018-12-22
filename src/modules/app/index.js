@@ -6,7 +6,11 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { Button, Drawer, Toolbar } from 'react-md';
 
 import { SignIn } from '../auth'
-import Home from '../home'
+
+import Dashboard from '../dashboard'
+import History from '../history'
+import News from '../news'
+import Game from '../game'
 
 import NavItemLink from './NavItemLink'
 import Inbox from './Inbox';
@@ -67,7 +71,11 @@ class App extends PureComponent {
           className="md-toolbar-relative md-grid"
         >
           <Switch key={location.pathname}>
-            <Route path={routes.home} exact component={Home} />
+            <Route path={routes.home} exact component={Dashboard} />
+            <Route path={routes.game} exact component={Game} />
+            <Route path={routes.news} exact component={News} />
+            <Route path={routes.history} exact component={History} />
+
             <Route path={navItems[1].to} component={Starred} />
             <Route path={navItems[2].to} component={SendMail} />
           </Switch>
