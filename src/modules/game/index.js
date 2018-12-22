@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { getData } from '../../utils'
 import Chart from './Chart/'
+import { SelectField } from 'react-md'
+
+import './index.scss'
+
+const COINS = ['BTC', 'ETH', 'LTC'];
 
 class Game extends Component {
   state = {}
@@ -31,17 +36,34 @@ class Game extends Component {
 
   render() {
     const { data } = this.state
-    console.log('data', data)
+    // console.log('data', data)
+
+    const chartWidth = window.innerWidth * 0.7
 
     if (data == null) {
       return <div>Loading...</div>
     }
 
+    const simplifiedMenu = false
+
     return (
-      <div>
-        Game
-        <div>
-          <Chart data={this.state.data} width="600"/>
+      <div >
+        <SelectField
+          id="select-coin"
+          placeholder="Current Coin"
+          className="md-cell"
+          menuItems={COINS}
+          position={SelectField.Positions.BELOW}
+          defaultValue={COINS[0]}
+          simplifiedMenu={simplifiedMenu}
+        />
+        <div className="game-wrapper md-grid">
+          <div className="chart-wrapper md-cell--7">
+            <Chart data={data} width={chartWidth} />
+          </div>
+          <div className="coin-controll-wrapper md-cell--5">
+
+          </div>
         </div>
       </div>
     )
