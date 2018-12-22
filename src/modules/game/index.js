@@ -48,6 +48,7 @@ class Game extends Component {
     currentPrice: 0,
     timeToEnd: 0,
     balance: 50,
+    eth_balance: 0,
   }
 
   componentDidMount() {
@@ -142,7 +143,7 @@ class Game extends Component {
     .then(function (response) {
       console.log(response)
       const { data = {}} = response
-      const { transaction, wallet } = data
+      const { transaction, wallet, eth_balance } = data
       console.log('transaction', transaction)
 
       const obj = {
@@ -153,6 +154,7 @@ class Game extends Component {
         amount: transaction.quantity,
         currencyPrice: transaction.currencyPrice,
         balance: wallet[0].quantity,
+        eth_balance: wallet[1].quantity,
       }
 
       // console.log('transaction', transaction)
@@ -166,16 +168,60 @@ class Game extends Component {
     console.log('buy', value)
   }
 
+  sell = (value) => {
+    const token = localStorage.getItem('token')
+    const nameGame = localStorage.getItem('currentGame')
+    const gameUserId = localStorage.getItem('gameUserId')
+    const numberOfdata = this.state.tableData.length
+    const that = this
+
+    axios.post(api.buy, {
+      token,
+      nameGame,
+      currency: 'ETHBTC',
+      quantity: +value,
+      sellBuy: 0,
+      gameUserId,
+    })
+    .then(function (response) {
+      console.log(response)
+      const { data = {}} = response
+      const { transaction, wallet } = data
+      console.log('transaction', transaction)
+
+      const obj = {
+        id: numberOfdata + 1,
+        type: 'sell',
+        date: new Date(),
+        user: 'amadev',
+        amount: transaction.quantity,
+        currencyPrice: transaction.currencyPrice,
+        balance: wallet[0].quantity,
+        eth_balance: wallet[1].quantity,
+      }
+
+      // console.log('transaction', transaction)
+      that.updateTableDate(obj)
+    })
+    .catch(function (error) {
+      console.log(error)
+      // addToast(error)
+    })
+
+    console.log('sell', value)
+  }
+
   updateTableDate = (transaction) => {
     this.setState((state) => {
       const { tableData = [], currentPrice } = state
-      const { currencyPrice, balance } = transaction
+      const { currencyPrice, balance, eth_balance } = transaction
       const newProfit = Number(((currentPrice / currencyPrice) - 1) * 100).toFixed(2)
       const newTableData = [...tableData, transaction]
       return {
         tableData: newTableData,
         profit: newProfit,
         balance,
+        eth_balance,
       }
     })
   }
@@ -193,6 +239,7 @@ class Game extends Component {
       profit,
       timeToEnd,
       balance,
+      eth_balance,
     } = this.state
     // console.log('data', data)
 
@@ -239,7 +286,9 @@ class Game extends Component {
         <ControlPanel
           profit={profit}
           balance={balance}
+          eth_balance={eth_balance}
           buy={this.buy}
+          sell={this.sell}
         />
       </div>
     )

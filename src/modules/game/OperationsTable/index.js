@@ -17,7 +17,6 @@ const SimplePlainTable = (props) => {
         <TableRow>
           <TableColumn>#</TableColumn>
           <TableColumn>type</TableColumn>
-          <TableColumn>date</TableColumn>
           <TableColumn>user</TableColumn>
           <TableColumn>amount</TableColumn>
         </TableRow>
@@ -27,8 +26,7 @@ const SimplePlainTable = (props) => {
           <TableRow key={data.id}>
             <TableColumn>{data.id}</TableColumn>
             <TableColumn>{data.type}</TableColumn>
-            <TableColumn>{moment(data.date).fromNow()}</TableColumn>
-            <TableColumn>{data.user}</TableColumn>
+            <TableColumn>You</TableColumn>
             <TableColumn>{data.amount}</TableColumn>
           </TableRow>
         )).reverse()}
