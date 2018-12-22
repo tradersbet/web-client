@@ -162,4 +162,4 @@ class CandleStickChartWithForceIndexIndicator extends Component {
   }
 }
 
-export default fitWidth(CandleStickChartWithForceIndexIndicator)
+export default CandleStickChartWithForceIndexIndicator
