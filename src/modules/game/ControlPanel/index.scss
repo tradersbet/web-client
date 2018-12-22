@@ -1,0 +1,11 @@
+.controlPanel {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+
+  & .profit {
+    & > div {
+      margin-right: 30px;
+    }
+  }
+}

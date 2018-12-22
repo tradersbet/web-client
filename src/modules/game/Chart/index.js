@@ -71,7 +71,7 @@ class CandleStickChartWithForceIndexIndicator extends Component {
 
     return (
       <ChartCanvas
-        height={550}
+        height={450}
         width={width}
         ratio={ratio}
         margin={{ left: 70, right: 70, top: 20, bottom: 30 }}

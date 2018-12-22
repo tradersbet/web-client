@@ -1,12 +1,18 @@
+.wrapper {
+  width: 100%;
+}
+
 .game-wrapper {
   display: flex;
   width: 100%;
 }
 
 .chart-wrapper {
-
+  width: calc(66% - 15px);
+  margin-right: 15px;
 }
 
 .coin-controll-wrapper {
-
+  width: calc(33% - 15px);
+  margin-left: 15px;
 }

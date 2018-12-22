@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { SelectField } from 'react-md'
 import { getData } from '../../utils'
 import Chart from './Chart/'
-import { SelectField } from 'react-md'
+import OperationsTable from './OperationsTable'
+import ControlPanel from './ControlPanel'
 
-import './index.scss'
+import './index.css'
 
 const COINS = ['BTC', 'ETH', 'LTC'];
 
@@ -38,16 +40,23 @@ class Game extends Component {
     const { data } = this.state
     // console.log('data', data)
 
-    const chartWidth = window.innerWidth * 0.7
+    let chartWidth = 0
+    if (this.chartWr) {
+      chartWidth = this.chartWr.offsetWidth
+    }
 
     if (data == null) {
       return <div>Loading...</div>
     }
 
+    const chart = this.chartWr
+      ? <Chart data={data} width={chartWidth} />
+      : null
+
     const simplifiedMenu = false
 
     return (
-      <div >
+      <div className="wrapper">
         <SelectField
           id="select-coin"
           placeholder="Current Coin"
@@ -57,14 +66,18 @@ class Game extends Component {
           defaultValue={COINS[0]}
           simplifiedMenu={simplifiedMenu}
         />
-        <div className="game-wrapper md-grid">
-          <div className="chart-wrapper md-cell--7">
-            <Chart data={data} width={chartWidth} />
+        <div className="game-wrapper">
+          <div
+            className="chart-wrapper"
+            ref={(el) => this.chartWr = el}
+          >
+            {chart}
           </div>
-          <div className="coin-controll-wrapper md-cell--5">
-
+          <div className="coin-controll-wrapper">
+            <OperationsTable />
           </div>
         </div>
+        <ControlPanel />
       </div>
     )
   }
