@@ -61,10 +61,13 @@ class Header extends Component {
           </Button>
         }
         actions={
-          <BadgeWithDialog
-            notifications={notifications}
-            onDismiss={this.dismiss}
-          />
+          <div className="header-right-info">
+            <div className="total">Total: 2000</div>
+            <BadgeWithDialog
+              notifications={notifications}
+              onDismiss={this.dismiss}
+            />
+          </div>
         }
       />
     )

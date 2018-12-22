@@ -138,3 +138,12 @@
     transition: opacity $md-transition-time;
   }
 }
+
+.header-right-info {
+  display: flex;
+  align-items: center;
+
+  &.total {
+    margin-right: 15px;
+  }
+}

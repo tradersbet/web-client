@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Badge, Button } from 'react-md'
+import {
+  Badge,
+  Button,
+} from 'react-md'
 import NotificationDialog from '../NotificationDialog'
 
 class BadgeWithDialog extends PureComponent {
@@ -42,7 +45,7 @@ class BadgeWithDialog extends PureComponent {
   render() {
     const { notifications, className, onDismiss } = this.props
     const { visible } = this.state
-    
+
     return (
       <Badge
         id="notification-badge-toggle"
@@ -52,6 +55,7 @@ class BadgeWithDialog extends PureComponent {
         badgeId="notification-badge"
         badgeContent={notifications.length}
       >
+
         <Button icon onClick={this.toggleDialog} aria-describedby="notification-badge">
           notifications
         </Button>
