@@ -1,5 +1,5 @@
 const routes = {
-  home: '/',
+  dashboard: '/',
   game: '/game',
   history: '/history',
   news: '/news',
@@ -7,8 +7,8 @@ const routes = {
 
 const navItems = [
   {
-    label: 'Home',
-    to: routes.home,
+    label: 'Dashboard',
+    to: routes.dashboard,
     exact: true,
     icon: 'inbox',
   },

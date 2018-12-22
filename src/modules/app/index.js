@@ -64,7 +64,7 @@ class App extends PureComponent {
           className="md-toolbar-relative md-grid"
         >
           <Switch key={location.pathname}>
-            <Route path={routes.home} exact component={Dashboard} />
+            <Route path={routes.dashboard} exact component={Dashboard} />
             <Route path={routes.game} exact component={Game} />
             <Route path={routes.news} exact component={News} />
             <Route path={routes.history} exact component={History} />

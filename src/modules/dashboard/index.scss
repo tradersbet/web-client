@@ -1,0 +1,38 @@
+.dashboard {
+  margin-bottom: 40px;
+}
+
+.games-category {
+  & .title {
+    margin-bottom: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #7eca5d;
+    font-size: 17px;
+    color: #fff;
+    margin-top: 20px;
+    padding-left: 10px;
+  }
+
+  & .my-games {
+    background-color: #ff4081;
+  }
+
+  & .available-games {
+    background-color: #3f51b5;
+  }
+
+  & .games-list {
+    display: inline-flex;
+
+    & > div {
+      margin-right: 10px;
+    }
+  }
+}
+
+.new-game-btn {
+  position: fixed !important;
+  right: 40px !important;
+  bottom: 40px !important;
+}
