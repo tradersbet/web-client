@@ -6,6 +6,7 @@ import Chart from './Chart/'
 import OperationsTable from './OperationsTable'
 import ControlPanel from './ControlPanel'
 import Timer from './Timer'
+import openSocket from 'socket.io-client'
 
 import config from '../../config'
 
@@ -13,7 +14,14 @@ import './index.css'
 
 const { api } = config
 
-const COINS = ['BTC', 'ETH', 'LTC'];
+const COINS = ['BTC', 'ETH', 'LTC']
+
+const socket = openSocket('http://10.25.128.242:3000')
+
+function subscribeToChannel(nameGame, cb) {
+  socket.on('game1x1.'+nameGame+ ':MarginChange', timestamp => cb(null, timestamp))
+  socket.emit('subscribeToTimer', 1000)
+}
 
 // const tableData = [
 //   {
@@ -55,6 +63,13 @@ class Game extends Component {
     const token = localStorage.getItem('token')
     const nameGame = localStorage.getItem('currentGame')
     const that = this
+
+    subscribeToChannel(nameGame, (err, timestamp) => {
+      console.log('timestamp', timestamp)
+      this.setState({
+        timestamp
+      })
+    });
 
     axios.post(api.joinGame, {
       token,

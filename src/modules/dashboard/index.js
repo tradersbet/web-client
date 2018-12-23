@@ -57,7 +57,7 @@ const CardGame = ({game = {}}) => {
   if (game.status === 'my_game') {
     content = (
       <div>
-        <p>The game was created by {game.author}. Deposit: {game.deposit}.</p>
+        <p>Deposit: {game.deposit}.</p>
         <Button raised secondary iconBefore={false} iconClassName="fa fa-hand-paper-o">
           Delete
         </Button>
@@ -68,8 +68,7 @@ const CardGame = ({game = {}}) => {
   return (
     <Card style={style} className="md-block-centered">
       <CardTitle
-        title={game.gameName}
-        subtitle={`Expired in ${moment(game.expirationTime, "DD.MM.YYYY").fromNow()}`}
+        title={game.userNameGame}
       />
       <CardText>
         {content}
@@ -119,6 +118,23 @@ class Dashboard extends Component {
 
     localStorage.setItem('currentGame', nameGame)
     history.push('/game')
+  }
+
+  createGame = (obj) => {
+    const token = localStorage.getItem('token')
+
+    axios.post(api.create, {
+      token,
+      time: '5000',
+      deposit: '50',
+      nameGame: 'newGame',
+    })
+    .then(function (response) {
+      console.log('response', response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 
   render() {
@@ -176,6 +192,7 @@ class Dashboard extends Component {
           visible={visibleNewGame}
           show={this.openNewGameModal}
           hide={this.closeNewGameModal}
+          create={this.createGame}
         />
       </div>
     )

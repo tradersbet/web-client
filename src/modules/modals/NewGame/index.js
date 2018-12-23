@@ -9,6 +9,20 @@ import {
 const filterType = Autocomplete.caseInsensitiveFilter
 
 class NewGameModal extends PureComponent {
+  state = {}
+
+  onChange = (field, v) => {
+    this.setState({
+      [field]: v,
+    })
+  }
+
+  createGame = () => {
+    const { create, hide } = this.props
+    create(this.state)
+    hide()
+  }
+
   render() {
     const {
       visible,
@@ -22,7 +36,7 @@ class NewGameModal extends PureComponent {
 
     const actions = []
     actions.push({ secondary: true, children: 'Cancel', onClick: hide })
-    actions.push(<Button flat primary onClick={hide}>Confirm</Button>)
+    actions.push(<Button flat primary onClick={this.createGame}>Confirm</Button>)
 
     return (
       <div>
@@ -37,6 +51,7 @@ class NewGameModal extends PureComponent {
             id="simple-action-dialog-field"
             label="Game title"
             placeholder="Title..."
+            onChange={(v) => this.onChange('gameName', v)}
           />
           <Autocomplete
             id="users-invite"
@@ -50,13 +65,14 @@ class NewGameModal extends PureComponent {
             type="number"
             label="Deposit"
             placeholder="0.01 btc"
+            onChange={(v) => this.onChange('deposit', v)}
           />
           <TextField
             id="simple-action-dialog-field"
-            type="date"
+            type="text"
             label="Expiration time"
             placeholder=""
-            defaultValue={new Date()}
+            onChange={(v) => this.onChange('time', v)}
           />
         </DialogContainer>
       </div>

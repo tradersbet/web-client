@@ -31,14 +31,16 @@ const navItems = [
   }
 ]
 
-const ip = 'http://10.25.128.242:8000'
+const ip = 'http://192.168.1.112:8000'
 const api = {
   register: `${ip}/api/register`,
   login: `${ip}/api/login`,
   dashboard: `${ip}/api/dashboard`,
   joinGame: `${ip}/api/joingame`,
-  ws: 'ws://10.25.128.242:8080',
+  ws: 'ws://192.168.1.112:8080',
+  ws2: 'http://192.168.1.112:3000',
   buy: `${ip}/api/transaction`,
+  create: `${ip}/api/create-game1x1`,
 }
 
 const config = {
