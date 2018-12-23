@@ -23,32 +23,6 @@ function subscribeToChannel(nameGame, cb) {
   socket.emit('subscribeToTimer', 1000)
 }
 
-// const tableData = [
-//   {
-//     id: 0,
-//     type: 'buy',
-//     date: moment().startOf('hour').fromNow(),
-//     user: 'amadev',
-//     benefit: '23%',
-//   },
-//   {
-//     id: 1,
-//     type: 'buy',
-//     date: moment().endOf('day').fromNow(),
-//     user: 'amadev',
-//     benefit: '23%',
-//   },
-//   {
-//     id: 2,
-//     type: 'buy',
-//     date: moment().startOf('day').fromNow(),
-//     user: 'amadev',
-//     benefit: '23%',
-//   }
-// ]
-
-
-
 class Game extends Component {
   state = {
     tableData: [],
@@ -76,14 +50,11 @@ class Game extends Component {
       nameGame,
     })
     .then(function (response) {
-      console.log('joinGame', response)
       const { gameUserId, timeLeft } = response.data
-      console.log('timeLeft', timeLeft)
       localStorage.setItem('gameUserId', gameUserId)
     })
     .catch(function (error) {
       console.log(error)
-      // addToast(error)
     })
 
     // getData().then(data => {
@@ -110,7 +81,6 @@ class Game extends Component {
     socket.onmessage = event => {
       const change = JSON.parse(event.data)
       const { ETHBTC } = change
-      // console.log('BTCUSDT', BTCUSDT)
       const { data = [] } = this.state
       const obj = {
         ...ETHBTC,
@@ -118,19 +88,6 @@ class Game extends Component {
       }
 
       const currentPrice = obj.high
-
-      // const obj = {
-      //     absoluteChange: undefined,
-      //     close: 25.710416,
-      //     date: new Date(),
-      //     dividend: "",
-      //     high: 25.835021381744056,
-      //     low: 25.411360259406774,
-      //     open: 25.436282332605284,
-      //     percentChange: undefined,
-      //     split: "",
-      //     volume: 38409100,
-      //   }
 
       const newData = [...data, obj]
       this.setState({
@@ -172,12 +129,10 @@ class Game extends Component {
         eth_balance: wallet[1].quantity,
       }
 
-      // console.log('transaction', transaction)
       that.updateTableDate(obj)
     })
     .catch(function (error) {
       console.log(error)
-      // addToast(error)
     })
 
     console.log('buy', value)
@@ -220,7 +175,6 @@ class Game extends Component {
     })
     .catch(function (error) {
       console.log(error)
-      // addToast(error)
     })
 
     console.log('sell', value)
@@ -244,10 +198,6 @@ class Game extends Component {
   render() {
     const nameGame = localStorage.getItem('currentGame')
 
-    // console.log('state', this.state)
-    // console.log('props', this.props)
-    // console.log('nameGame', nameGame)
-
     const {
       data,
       tableData,
@@ -256,7 +206,6 @@ class Game extends Component {
       balance,
       eth_balance,
     } = this.state
-    // console.log('data', data)
 
     let chartWidth = 0
     if (this.chartWr) {

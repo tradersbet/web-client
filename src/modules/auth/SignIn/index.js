@@ -38,7 +38,6 @@ class SignIn extends Component {
     const { addToast } = this
     const { email, pass } = this.state
     const { history } = this.props
-    console.log('props', this.props)
 
     axios.post(api.login, {
       email,
