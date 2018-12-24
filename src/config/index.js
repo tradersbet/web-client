@@ -1,3 +1,5 @@
+import apiConfig from './api'
+
 const routes = {
   dashboard: '/',
   game: '/game',
@@ -45,6 +47,7 @@ const api = {
 
 const config = {
   api,
+  apiConfig,
   routes,
   navItems,
 }
