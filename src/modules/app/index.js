@@ -15,8 +15,6 @@ import Game from '../game'
 import UserRating from '../userRating'
 import ReferalProgram from '../referalProgram'
 
-import NavItemLink from './NavItemLink'
-
 import config from '../../config'
 const { api, routes, navItems } = config
 
@@ -79,7 +77,6 @@ class App extends PureComponent {
           onVisibilityChange={this.handleVisibility}
           header={<Toolbar title={<Link to="/components/drawers#react-router-example">Menu</Link>} />}
           renderNode={this.dialog}
-          navItems={navItems.map(props => <NavItemLink {...props} key={props.to} />)}
         />
       </div>
     )
