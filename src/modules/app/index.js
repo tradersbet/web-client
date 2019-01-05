@@ -61,6 +61,7 @@ class App extends PureComponent {
           className="md-toolbar-relative md-grid"
         >
           <Switch key={location.pathname}>
+            <Route path={'/'} exact component={SignIn} />
             <Route path={routes.signIn} exact component={SignIn} />
             <Route path={routes.signUp} exact component={SignUp} />
             <Route path={routes.dashboard} exact component={Dashboard} />

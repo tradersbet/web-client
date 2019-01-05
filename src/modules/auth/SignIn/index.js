@@ -59,7 +59,7 @@ class SignIn extends Component {
   render() {
     const { toasts, autohide } = this.state
     return (
-      <div className="sign-up">
+      <div className="sign-in">
         <h2>Sign In</h2>
         <TextField
           id="floating-center-title"

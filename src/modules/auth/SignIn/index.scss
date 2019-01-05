@@ -1,7 +1,45 @@
+body {
+  width: 100vw;
+  max-width: 100%;
+  padding: 45px 0 0;
+  margin: 0;
+  min-height: 100vh;
+  height: 100%;
+  background: url("https://cryptoservice24.com/dist/loginBg.jpg?5a8eedba7fc9739bdd36203175b39795");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+
+  header {
+    color: #fff;
+    background: black !important;
+  }
+}
+
 .sign-in {
+  background-color: #101217;
+  padding: 40px 35px 35px;
   width: 350px;
   margin: 0 auto;
-  background-color: #fff;
   padding: 25px;
   margin-top: 150px;
+
+  p, div, label, h2 {
+    color: white;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  button.md-btn--flat {
+    background: #666;
+    padding: 15px 35px;
+    height: 45px;
+    font-size: 12px;
+    border-radius: 30px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 40px;
+  }
 }
