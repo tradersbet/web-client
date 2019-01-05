@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'redux'
-import { getUserRating } from './../actions'
+import { connect } from 'react-redux'
+import { getUserRating } from './../../actions'
 
 class UrerRating extends Component {
   componentDidMount() {

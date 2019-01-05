@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'redux'
+import { Card, CardTitle, CardText, FontIcon } from 'react-md'
+import { connect } from 'react-redux'
 
 class ReferalProgram extends Component {
   render() {
@@ -13,9 +14,7 @@ class ReferalProgram extends Component {
         <CardTitle title="Referals Program" />
         <CardText>
           <FontIcon
-            className={cn('drawers__routing__send-icon', {
-              'drawers__routing__send-icon--active': sending,
-            })}
+            className="drawers__routing__send-icon"
           >
             send
           </FontIcon>
