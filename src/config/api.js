@@ -12,7 +12,7 @@ const apiConfig = {
     failureAction: gotFailure,
     getOptions: ({id}) => ({
       method: 'get',
-      url: `https://jsonplaceholder.typicode.com/todos/${id}`,
+      url: `https://cryptoservice24.com/user/${id}`,
     }),
   },
   createUser: {
@@ -21,7 +21,7 @@ const apiConfig = {
     failureAction: gotFailure,
     getOptions: ({user}) => ({
       method: 'post',
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'https://cryptoservice24.com/newUser/',
       data: user,
     }),
   }
