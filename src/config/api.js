@@ -3,6 +3,8 @@ import {
   CREATE_USER,
   gotUser,
   gotFailure,
+  GET_USER_RATING,
+  gotUserRating,
 } from '../actions/';
 
 const apiConfig = {
@@ -24,7 +26,16 @@ const apiConfig = {
       url: 'https://cryptoservice24.com/newUser/',
       data: user,
     }),
-  }
+  },
+  getUserRating: {
+    triggerActionType: GET_USER_RATING,
+    successAction: gotUserRating,
+    failureAction: gotFailure,
+    getOptions: ({id}) => ({
+      method: 'get',
+      url: `https://cryptoservice24.com/userRating/${id}`,
+    }),
+  },
 }
 
 export default apiConfig

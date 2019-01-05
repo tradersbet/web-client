@@ -7,6 +7,8 @@ const routes = {
   news: '/news',
   signIn: '/sign-in',
   signUp: '/sign-up',
+  userRating: '/user-rating',
+  referalProgram: '/referal-program',
 }
 
 const navItems = [
