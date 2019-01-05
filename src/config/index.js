@@ -33,14 +33,13 @@ const navItems = [
   }
 ]
 
-const ip = 'http://192.168.1.112:8000'
+const ip = 'https://cryptoservice24.com'
 const api = {
   register: `${ip}/api/register`,
   login: `${ip}/api/login`,
   dashboard: `${ip}/api/dashboard`,
   joinGame: `${ip}/api/joingame`,
   ws: 'ws://192.168.1.112:8080',
-  ws2: 'http://192.168.1.112:3000',
   buy: `${ip}/api/transaction`,
   create: `${ip}/api/create-game1x1`,
 }
