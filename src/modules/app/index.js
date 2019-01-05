@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Button, Drawer, Toolbar } from 'react-md';
 
-
 import Header from './Header'
 
 import { SignIn, SignUp } from '../auth'
@@ -13,11 +12,10 @@ import Dashboard from '../dashboard'
 import History from '../history'
 import News from '../news'
 import Game from '../game'
+import UserRating from '../userRating'
+import ReferalProgram from '../referalProgram'
 
 import NavItemLink from './NavItemLink'
-import Inbox from './Inbox';
-import Starred from './Starred'
-import SendMail from './SendMail'
 
 import config from '../../config'
 const { api, routes, navItems } = config
@@ -69,6 +67,9 @@ class App extends PureComponent {
             <Route path={routes.game} exact component={Game} />
             <Route path={routes.news} exact component={News} />
             <Route path={routes.history} exact component={History} />
+            <Route path={routes.userRating} exact component={UserRating} />
+            <Route path={routes.referalProgram} exact component={ReferalProgram} />
+            UserRating
           </Switch>
         </CSSTransitionGroup>
         <Drawer

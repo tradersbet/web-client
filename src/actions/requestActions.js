@@ -21,3 +21,14 @@ export const gotFailure = (error) => ({
   type: GOT_FAILURE,
   error,
 })
+
+export const GET_USER_RATING = 'GET_USER_RATING'
+export const getUserRating = () => ({
+  type: GET_USER_RATING,
+})
+
+export const GOT_USER_RATING = 'GOT_USER_RATING'
+export const gotUserRating = (data) => ({
+  type: GOT_USER_RATING,
+  data,
+})
